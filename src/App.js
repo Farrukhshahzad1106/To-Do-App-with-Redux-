@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+
 import './App.css';
 
+export const ACTION_TYPES = {
+  ADD : "add",
+  EDIT : "edit",
+  REMOVE : "remove",
+  COMPLETE : "complete",
+  THEME : "theme"
+}
+
 function App() {
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div>
+      <header>
+        <h2>To-Do App</h2>
       </header>
+      <main>
+          <div>
+
+          </div>
+      </main>
+      <footer>
+        <p>Developed by Farrukh</p>
+      </footer>
     </div>
   );
 }
