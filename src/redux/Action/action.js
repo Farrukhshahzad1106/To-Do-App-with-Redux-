@@ -7,10 +7,10 @@ export const add = (input) => {
     }
 }
 
-export const remove = (index) => {
+export const remove = (todo) => {
     return {
         type : ACTION_TYPES.REMOVE,
-        payload : index
+        payload : todo
     }
 }
 
