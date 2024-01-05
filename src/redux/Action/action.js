@@ -14,19 +14,18 @@ export const remove = (todo) => {
     }
 }
 
-export const edit = (item, index) => {
+export const edit = (todo) => {
     return {
         type: ACTION_TYPES.EDIT,
-        payload : item,
-        index: index
+        payload : todo
     }
 }
 
-export const complete = (item, index) => {
+export const complete = (todo) => {
     return {
         type : ACTION_TYPES.COMPLETE,
-        payload : item,
-        index: index
+        payload : todo
+        
     }
 }
 

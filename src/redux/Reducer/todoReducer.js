@@ -1,9 +1,9 @@
 
 const initialState = {
     count : 1,
-    list : [{id: 1, task : "First Task", completed : false},{id : 2, task : "Second Task", completed : false}],
-    editTodo : {},
-    theme : false,
+    list : [{id: 1, task : "First Task"},{id : 2, task : "Second Task"}],
+    editTodo : null,
+    theme : false, //true for darkMode and false for lightMode
     completed : []
 }
 
@@ -16,8 +16,7 @@ export const todoReducer = (state = initialState, action) => {
                 list : [
                     {
                         id : state.count,
-                        task : action.payload,
-                        completed  :false
+                        task : action.payload
                     },
                     ...state.list
                 ],
@@ -59,6 +58,40 @@ export const todoReducer = (state = initialState, action) => {
                     theme : !state.theme
                 }
 
+        case "complete":
+            const inList = state.list.some((todo) => todo.id === action.payload.id);
+            const inCompleted = state.completed.some((todo) => todo.id === action.payload.id);
+
+            if(inList){
+                return {
+                    ...state,
+                    list : state.list.filter((todo) => todo.id !== action.payload.id),
+                    completed : [
+                        state.completed,
+                        action.payload
+                    ]
+                }
+            }
+            if(inCompleted) {
+                return{
+                    ...state,
+                    completed : state.completed((todo) => todo.id  !== action.payload.id),
+                    list : [
+                        ...state.list,
+                        action.payload
+                    ]
+                }
+            }
+        break;
+        case "edit" :
+            return{
+                ...state,
+                editTodo : action.payload
+            }
+
+
+
+            return state;
 
         default : 
             return state;
