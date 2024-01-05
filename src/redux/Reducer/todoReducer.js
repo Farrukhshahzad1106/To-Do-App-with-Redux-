@@ -55,7 +55,8 @@ export const todoReducer = (state = initialState, action) => {
 
         case "theme":
                 return {
-                    ...state
+                    ...state,
+                    theme : !state.theme
                 }
 
 
