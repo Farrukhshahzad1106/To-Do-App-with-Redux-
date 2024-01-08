@@ -1,18 +1,33 @@
 
 const initialState = {
     count : 1,
-    list : [{id: 1, task : "First Task"},{id : 2, task : "Second Task"}],
-    editTodo : null,
+    list : [],
+    editTodo : "",
     theme : false, //true for darkMode and false for lightMode
-    completed : []
+    completed : ["HEHEHE"]
 }
+
+
 
 export const todoReducer = (state = initialState, action) => {
 
     switch (action.types) {
         case "add" :
+            if(state.editTodo){
+                const editTodoObj = state.list.filter( (todo) => todo.id === state.editTodo.id);
+                const list = state.list.filter( (todo) => todo.id !== state.list.id)
+                return {
+                    list : [
+                        {
+                            ...editTodoObj,
+                            task : action.payload
+                        },
+                        ...list
+                    ],
+                    ...state
+                }
+            }
             return {
-                ...state,
                 list : [
                     {
                         id : state.count,
@@ -20,6 +35,7 @@ export const todoReducer = (state = initialState, action) => {
                     },
                     ...state.list
                 ],
+                ...state,                
                 count : state.count++
             }    
             
@@ -46,17 +62,7 @@ export const todoReducer = (state = initialState, action) => {
                     })
                 }
             }
-
-
             break;
-            
-            
-
-        case "theme":
-                return {
-                    ...state,
-                    theme : !state.theme
-                }
 
         case "complete":
             const inList = state.list.some((todo) => todo.id === action.payload.id);
@@ -84,18 +90,44 @@ export const todoReducer = (state = initialState, action) => {
             }
         break;
         case "edit" :
+            
             return{
                 ...state,
                 editTodo : action.payload
             }
 
-
-
-            return state;
-
         default : 
             return state;
     }
-
-        return state;
 }
+
+
+
+
+
+// const initialData = {
+//     list : []
+// }
+
+// export const todoReducer = (state = initialData, action) => {
+//     switch(action.type) {
+//         case "ADD":
+//             const {id, data} = action.payload;
+//             return {
+//                 ...state,
+//                 list : [
+//                     ...state.list,
+//                     {
+//                         id: id,
+//                         data: data
+//                     }
+//                 ]
+//             }
+//         break;
+//         default:
+//             console.log("executing");
+//             return state;
+//     }
+// }
+
+// // export default todoReducer;
